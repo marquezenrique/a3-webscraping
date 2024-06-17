@@ -1,5 +1,6 @@
 # Importações das bibliotecas necessárias
 import requests as req
+import datetime
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
@@ -38,15 +39,17 @@ def Main():
 
 
 
-#Definindo função do processamento dos dados coletados
+# Definindo função do processamento dos dados coletados
 def RenderData(products):
     # Criando DataFrame usando pandas
     df = pd.DataFrame(products)
     df.sort_values(["name", "discount"], inplace=True)
 
     # Exportando dados para arquivo .csv e .xlsx (Excel) no diretório './output'
-    df.to_csv("output/descontos.csv", index=False)
-    df.to_excel("output/descontos.xlsx", index=False, sheet_name="Produtos")
+    date = datetime.date.today()
+    file_name = f"{date.strftime("%d_%m_%Y")}_A3_Equipe_7"
+    df.to_csv(f"output/{file_name}.csv", index=False)
+    df.to_excel(f"output/{file_name}.xlsx", index=False, sheet_name="Produtos")
 
     # Calculando Q's, Mediana e Média
     qs = np.percentile(df['discount'].dropna(), [25, 50, 75])
