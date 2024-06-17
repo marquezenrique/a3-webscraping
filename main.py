@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 page_url = "https://www.mercadolivre.com.br/ofertas#c_id=/home/promotions-recommendations"
 
 # Declarando função principal
-def main():
+def Main():
     # Requisitando conteúdo HTML da url definida
     res = req.get(page_url)
     soup = BeautifulSoup(res.content, 'html.parser')
@@ -74,4 +74,4 @@ def RenderData(products):
     plt.show()
 
 
-main()
+Main()
